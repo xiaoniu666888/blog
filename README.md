@@ -1,2 +1,2 @@
 # blog
-A blog by vue3
+A blog by Vue3  + Nodejs + mongoDB
