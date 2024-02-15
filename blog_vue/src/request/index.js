@@ -39,7 +39,7 @@ class xnRequest {
                 setTimeout(() => {
                     router.push('/login')
                 }, 1000)
-                return false
+                return false;
             } else {
                 message(msg, code);
                 return false;

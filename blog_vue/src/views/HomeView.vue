@@ -44,17 +44,21 @@ import RightSide from '@/components/side/RightSide.vue';
         width: 20vw;
         text-align: center;
         border-right: 1px solid #87CEEB;
+        padding-right: 5px;
+        box-sizing: border-box;
     }
 
     .middle-content {
         flex: 1;
-        // text-align: center;
+
     }
 
     .rightSide {
         width: 25vw;
         text-align: center;
         border-left: 1px solid #87CEEB;
+        padding-left: 5px;
+        box-sizing: border-box;
     }
 }
 </style>

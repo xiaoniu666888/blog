@@ -120,7 +120,6 @@ const submitForm = (formEl, operate) => {
                 if (res) {
                     resetForm(ruleRegFormRef.value)
                 }
-                console.log(res);
             } else {
                 message("任意一项均不能为空或填写错误", 400)
                 return false
@@ -129,7 +128,18 @@ const submitForm = (formEl, operate) => {
     }
 
 }
+// 已有帐号,去登陆
+const goLogin = () => {
+    isReg.value = !isReg.value
+    resetForm(ruleRegFormRef.value)
+}
 
+// 去注册
+
+const goReg = () => {
+    isReg.value = !isReg.value
+    resetForm(ruleLoginFormRef.value)
+}
 
 </script>
 
@@ -139,48 +149,54 @@ const submitForm = (formEl, operate) => {
 
         <div class="login-container">
             <!-- 登录 -->
-            <el-form v-if="isReg" class="login-form demo-ruleForm" ref="ruleLoginFormRef" :model="ruleForm" status-icon
-                :rules="rules" label-width="65px" label-position="top">
-                <h2 class="loginTitle">用户登录</h2>
 
-                <el-form-item label="用户名" prop="username">
-                    <el-input v-model.trim="ruleForm.username" style="min-width: 40vw;" autocomplete="off" />
-                </el-form-item>
-                <el-form-item label="密码" prop="password">
-                    <el-input v-model.trim="ruleForm.password" style="min-width: 40vw;" type="password"
-                        autocomplete="off" />
-                </el-form-item>
 
-                <el-form-item style="text-align: center;">
-                    <el-button type="primary" @click="submitForm(ruleLoginFormRef, 'login')">登录</el-button>
-                    <el-button @click="isReg = !isReg">注册</el-button>
-                </el-form-item>
+            <transition mode="out-in" name="login">
+                <el-form v-show="isReg" class="login-form demo-ruleForm" ref="ruleLoginFormRef" :model="ruleForm"
+                    status-icon :rules="rules" label-width="65px" label-position="top">
+                    <h2 class="loginTitle">用户登录</h2>
 
-            </el-form>
+                    <el-form-item label="用户名" prop="username">
+                        <el-input v-model.trim="ruleForm.username" style="min-width: 40vw;" autocomplete="off" />
+                    </el-form-item>
+                    <el-form-item label="密码" prop="password">
+                        <el-input v-model.trim="ruleForm.password" style="min-width: 40vw;" type="password"
+                            autocomplete="off" />
+                    </el-form-item>
+
+                    <el-form-item style="text-align: center;">
+                        <el-button type="primary" @click="submitForm(ruleLoginFormRef, 'login')">登录</el-button>
+                        <el-button @click="goReg">注册</el-button>
+                    </el-form-item>
+                </el-form>
+            </transition>
+
             <!-- 注册 -->
-            <el-form v-else class="login-form demo-ruleForm" ref="ruleRegFormRef" :model="ruleRegForm" status-icon
-                :rules="regRules" label-width="65px" label-position="top">
+            <transition mode="out-in" name="reg">
+                <el-form v-show="!isReg" class="login-form reg-form demo-ruleForm" ref="ruleRegFormRef" :model="ruleRegForm"
+                    status-icon :rules="regRules" label-width="65px" label-position="top">
 
-                <h2 class="loginTitle">{{ isReg ? '用户登录' : '用户注册' }}</h2>
+                    <h2 class="loginTitle">{{ isReg ? '用户登录' : '用户注册' }}</h2>
 
-                <el-form-item label="用户名" prop="username">
-                    <el-input v-model.trim="ruleRegForm.username" style="min-width: 40vw;" autocomplete="off" />
-                </el-form-item>
-                <el-form-item label="密码" prop="password">
-                    <el-input v-model.trim="ruleRegForm.password" style="min-width: 40vw;" type="password"
-                        autocomplete="off" />
-                </el-form-item>
+                    <el-form-item label="用户名" prop="username">
+                        <el-input v-model.trim="ruleRegForm.username" style="min-width: 40vw;" autocomplete="off" />
+                    </el-form-item>
+                    <el-form-item label="密码" prop="password">
+                        <el-input v-model.trim="ruleRegForm.password" style="min-width: 40vw;" type="password"
+                            autocomplete="off" />
+                    </el-form-item>
 
-                <el-form-item label="再次输入密码" style="min-width: 40vw;" prop="againPsd">
-                    <el-input v-model.trim="ruleRegForm.againPsd" type="password" autocomplete="off" />
-                </el-form-item>
+                    <el-form-item label="再次输入密码" style="min-width: 40vw;" prop="againPsd">
+                        <el-input v-model.trim="ruleRegForm.againPsd" type="password" autocomplete="off" />
+                    </el-form-item>
 
-                <el-form-item style="text-align: center;">
-                    <el-button type="primary" @click="submitForm(ruleRegFormRef, 'reg')">注册</el-button>
-                    <el-button @click="resetForm(ruleRegFormRef)">重置</el-button>
-                </el-form-item>
-                <span @click="isReg = !isReg">已有账号，去登陆</span>
-            </el-form>
+                    <el-form-item style="text-align: center;">
+                        <el-button type="primary" @click="submitForm(ruleRegFormRef, 'reg')">注册</el-button>
+                        <el-button @click="resetForm(ruleRegFormRef)">重置</el-button>
+                    </el-form-item>
+                    <span @click="goLogin">已有账号，去登陆</span>
+                </el-form>
+            </transition>
         </div>
 
     </div>
@@ -225,8 +241,39 @@ const submitForm = (formEl, operate) => {
             }
         }
     }
+}
 
+.login-enter-active,
+.login-leave-active {
+    transition: all .8s ease;
+}
 
+.login-enter-from,
+.login-leave-to {
+    opacity: 0;
+    transform: translateX(-3vw);
+}
 
+.login-enter-to,
+.login-leave-from {
+    opacity: 1;
+    transform: translateX(23vw);
+}
+
+.reg-enter-active,
+.reg-leave-active {
+    transition: all .8s ease;
+}
+
+.reg-enter-from,
+.reg-leave-to {
+    opacity: 0;
+    transform: translateX(3vw);
+}
+
+.reg-enter-to,
+.reg-leave-from {
+    transform: translateX(-23vw);
+    opacity: 1;
 }
 </style>

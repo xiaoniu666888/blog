@@ -63,7 +63,7 @@ router.post('/reg', async function (ctx, next) {
     userDate: Date.now(),
     userImg: '/images/default.jpg' // public文件夹
   })
-  ctx.body = util.success('注册成功')
+  ctx.body = util.success({}, '注册成功')
 })
 
 // 登录

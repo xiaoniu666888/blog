@@ -75,7 +75,7 @@ const handleExit = () => {
                 <el-avatar class="avatar" shape="square" size="default"
                     :src="'/api' + useStore.userInfo.userImg || avaUrl" />
                 <template #content>
-                    <span class="person" @click="handleInfo">修改信息</span>
+                    <span class="person" @click="handleInfo">个人信息</span>
                     <br>
                     <span class="exit" @click="handleExit">退出登录</span>
                 </template>

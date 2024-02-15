@@ -11,20 +11,19 @@ const users = require('./routes/users')
 const koaJwt = require('koa-jwt')
 const util = require('./utils')
 const { koaBody } = require('koa-body');
-const path = require('path')
 require("./db/mongoose")
 require("./config/swagger-app-wrapper")(app)
 // error handler
 onerror(app)
-app.use(cors())
+
 // middlewares
-app.use(bodyparser({
-  enableTypes: ['json', 'form', 'text']
-}))
+// app.use(bodyparser({
+//   enableTypes: ['json', 'form', 'text']
+// }))
+app.use(cors())
 app.use(koaBody({
   multipart: true,
   formidable: {
-    // uploadDir: path.join(__dirname, `/public/images`),  //上传文件存储目录
     keepExtensions: true,  //允许保留后缀名
     multipart: true,
   }
