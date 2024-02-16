@@ -1,15 +1,21 @@
 <template>
-    <div>
-        Article
+    <div id="article-view">
+        <md-preview v-model="text" style="width: 100%; padding: 0 10px;" />
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
+import { MdPreview } from 'md-editor-v3';
+import 'md-editor-v3/lib/style.css';
+
+const text = ref(" ```vue \n <template>  \n    <MdEditor/>  \n </template> \n  ``` ");
 
 
-export default {
-
-}
 </script>
 
-<style scoped></style>
+<style scoped>
+#article-view {
+    width: 100%;
+}
+</style>

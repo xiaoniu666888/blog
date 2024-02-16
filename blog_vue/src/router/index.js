@@ -9,7 +9,13 @@ const routes = [
         path: '/home',
         name: 'home',
         component: () => import('../views/HomeView.vue'),
+        redirect: '/home/welcome',
         children: [
+            {
+                path: 'welcome',
+                name: 'welcome',
+                component: () => import('../views/WelcomeView.vue')
+            },
             {
                 path: 'article',
                 component: () => import('../views/ArticleView.vue')

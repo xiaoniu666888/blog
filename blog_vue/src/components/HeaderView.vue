@@ -45,7 +45,7 @@ const handleInfo = () => {
 }
 // 退出登录
 const handleExit = () => {
-    router.push({ path: '/login' })
+    router.push({ path: '/' })
     local.delete('userInfo')
     useStore.delUserInfo()
 }

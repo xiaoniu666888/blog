@@ -9,6 +9,7 @@ import RightSide from '@/components/side/RightSide.vue';
     <div id="home">
         <header>
             <div class="center">
+
                 <header-view></header-view>
             </div>
         </header>
@@ -20,7 +21,7 @@ import RightSide from '@/components/side/RightSide.vue';
                         <left-side></left-side>
                     </div>
                     <div class="middle-content">
-                        <router-view class="center"></router-view>
+                        <router-view class="router-view"></router-view>
                     </div>
                     <div class="rightSide hidden-xs-only">
                         <right-side></right-side>
@@ -50,7 +51,11 @@ import RightSide from '@/components/side/RightSide.vue';
 
     .middle-content {
         flex: 1;
+        box-sizing: border-box;
 
+        .router-view {
+            width: 100%;
+        }
     }
 
     .rightSide {
