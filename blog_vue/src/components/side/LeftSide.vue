@@ -109,6 +109,7 @@ const popularTitle = reactive([
             </el-card>
 
         </footer>
+
     </div>
 </template>
 
@@ -122,6 +123,7 @@ const popularTitle = reactive([
     align-items: center;
     justify-content: space-between;
     // overflow-y: hidden;
+    // overflow-y: scroll;
 
     .header {
         width: 100%;

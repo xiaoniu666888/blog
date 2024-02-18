@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const privateKey = '#xiaoniu$'  // token解密钥匙
 module.exports = {
-    success(data = {}, message, code = 200) {
+    success(message, data = {}, code = 200) {
 
         return { message, data, code }
     },

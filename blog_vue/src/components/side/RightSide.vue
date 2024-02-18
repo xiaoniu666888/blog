@@ -69,10 +69,10 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .right {
-    width: 25vw;
+    width: 100%;
     height: 100%;
     position: relative;
-    overflow-y: scroll;
+    // overflow-y: scroll;
 
     .calendar {
         width: 100%;

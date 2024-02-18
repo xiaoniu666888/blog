@@ -1,27 +1,26 @@
 import { ElMessage } from 'element-plus'
 const namespace = 'users'  // 设置命名空间
-function message(message = "默认信息", code = 200) {
+function message(message, code = 200) {
 
-    if (code === 200) {
+    if (code === 200 && message) {
         ElMessage({
-
             type: 'success',
             message
         })
 
-    } else if (code === 300) {
+    } else if (code === 300 && message) {
 
         ElMessage({
             type: 'info',
             message
         })
-    } else if (code === 400) {
+    } else if (code === 400 && message) {
         ElMessage({
 
             type: 'warning',
             message
         })
-    } else if (code === 401) {
+    } else if (code === 401 && message) {
         ElMessage({
             type: 'error',
             message

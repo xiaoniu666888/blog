@@ -1,5 +1,5 @@
 const router = require('koa-router')()
-const User = require('../models/mogooseUsers')
+const User = require('../models/mongooseUsers')
 const util = require('../utils')
 const path = require('path')
 const fs = require('fs')
@@ -53,6 +53,7 @@ router.post('/reg', async function (ctx, next) {
   const { username, password } = ctx.request.body
   const res = await User.findOne({ username })
   if (res) {
+    console.log(res);
     ctx.body = util.fail('账号已存在')
     return
   }
@@ -63,7 +64,7 @@ router.post('/reg', async function (ctx, next) {
     userDate: Date.now(),
     userImg: '/images/default.jpg' // public文件夹
   })
-  ctx.body = util.success({}, '注册成功')
+  ctx.body = util.success('注册成功', {})
 })
 
 // 登录
@@ -91,7 +92,7 @@ router.get('/token', async function (ctx, next) {
     const header = ctx.request.headers.authorization
     const data = await util.verifyToken(header)
 
-    ctx.body = util.success(data, 'token请求成功')
+    ctx.body = util.success('token请求成功', data)
   }
   else {
     console.log(666);
@@ -103,7 +104,7 @@ router.get('/token', async function (ctx, next) {
 router.post('/avatar', async function (ctx, next) {
   // 检查是否有文件上传  
   const file = ctx.request.files.file;
-  if (!file) return ctx.body = util.fail({}, '请上传头像')
+  if (!file) return ctx.body = util.fail('请上传头像')
   // 有文件上传则修改文件
   const { id } = ctx.request.body
   const res = await User.findById(id)
@@ -131,7 +132,7 @@ router.post('/avatar', async function (ctx, next) {
       let tokenData = util.setToken({ token: data })
       data.token = tokenData
       // 文件保存成功  
-      ctx.body = util.success(data, '头像修改成功')
+      ctx.body = util.success('头像修改成功', data)
       resolve();
     })
 

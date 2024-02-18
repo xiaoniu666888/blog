@@ -8,6 +8,8 @@ const logger = require('koa-logger')
 const cors = require('koa2-cors')
 const index = require('./routes/index')
 const users = require('./routes/users')
+const notes = require('./routes/notes')
+const articles = require('./routes/articles')
 const koaJwt = require('koa-jwt')
 const util = require('./utils')
 const { koaBody } = require('koa-body');
@@ -65,6 +67,8 @@ app.use(koaJwt({ secret: '#xiaoniu$' }).unless({
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+app.use(notes.routes(), notes.allowedMethods())
+app.use(articles.routes(), articles.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

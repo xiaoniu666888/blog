@@ -31,7 +31,7 @@ class xnRequest {
         instance.interceptors.response.use(function (response) {
             const { data, code, message: msg } = response.data;
             if (code === 200) {
-                // 如果状态码是200，调用message函数并返回数据  
+                // 如果状态码是200，调用message提示函数并返回数据  
                 message(msg, code);
                 return data;
             } else if (code === 401) {
