@@ -1,6 +1,14 @@
 import axios from 'axios'
 import { message, local } from '@/utils'
 import router from '@/router'
+/**
+ * code 
+ *      200 => 需要提示
+ *      300 => 成功但不需要提示
+ *      400 => 警告信息
+ *      401 => 身份验证失败
+ *      404 => Not found
+ */
 
 // 封装
 class xnRequest {
@@ -30,11 +38,18 @@ class xnRequest {
     responseInercept(instance) {
         instance.interceptors.response.use(function (response) {
             const { data, code, message: msg } = response.data;
+
             if (code === 200) {
                 // 如果状态码是200，调用message提示函数并返回数据  
                 message(msg, code);
                 return data;
-            } else if (code === 401) {
+
+            } else if (code === 300) {
+                // 300 => 成功但不需要提示
+                return data
+            }
+            else if (code === 401) {
+                //  401 => 身份验证失败
                 message(msg, code);
                 setTimeout(() => {
                     router.push('/login')

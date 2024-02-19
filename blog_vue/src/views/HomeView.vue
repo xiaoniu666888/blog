@@ -21,7 +21,7 @@ import RightSide from '@/components/side/RightSide.vue';
                         <left-side></left-side>
                     </div>
                     <div class="middle-content">
-                        <router-view class="router-view"></router-view>
+                        <router-view class="router-view animate__animated animate__fadeInDown "></router-view>
                     </div>
                     <div class="rightSide hidden-xs-only">
                         <right-side></right-side>

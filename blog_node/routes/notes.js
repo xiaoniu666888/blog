@@ -2,7 +2,6 @@ const router = require('koa-router')()
 const util = require('../utils')
 const path = require('path')
 const fs = require('fs')
-// const User = require('../models/mongooseUsers')
 const Note = require('../models/mongooseNotes')
 // 路由前缀 
 router.prefix('/notes')
@@ -27,7 +26,7 @@ router.post('/img', (ctx, next) => {
         writer.on('error', (err) => {
             // 文件保存失败  
             // ctx.status = 500;
-            ctx.body = util.fail('图片上传失败', 500)
+            ctx.body = util.fail('图片上传失败', 400)
             reject(err);
         });
     })
@@ -67,7 +66,7 @@ router.post('/checktitle', async (ctx, next) => {
         let res = await Note.findOne({ title })
         // 标题重复
         if (res) return ctx.body = util.fail('标题已存在', 400)
-        return ctx.body = util.success('标题合适')
+        return ctx.body = util.success('标题合适', {}, 300)
     } catch (error) {
         console.error(error)
     }

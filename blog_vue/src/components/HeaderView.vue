@@ -34,7 +34,8 @@ const navTitles = reactive([
 
 ])
 const router = useRouter()
-
+// 当前导航
+const currentIndex = ref()
 // 点击logo
 const ToHome = () => {
     router.push({ path: '/' })
@@ -49,6 +50,10 @@ const handleExit = () => {
     local.delete('userInfo')
     useStore.delUserInfo()
 }
+// 点击导航栏
+const handleCilckNav = (index) => {
+    currentIndex.value = index
+}
 </script>
 
 
@@ -59,8 +64,8 @@ const handleExit = () => {
         </div>
         <div class="nav-list">
             <template v-for="(item, index) in navTitles" :key="index">
-                <router-link :to="item.path" style="text-decoration: none;">
-                    <span class="nav-title">
+                <router-link @click="handleCilckNav(index)" :to="item.path" style="text-decoration: none;">
+                    <span :class="['nav-title', currentIndex === index && 'active']">
                         <el-icon class="icons hidden-xs-only">
                             <component :is="item.icon" />
                         </el-icon>
@@ -134,6 +139,11 @@ const handleExit = () => {
 
         .nav-title:hover {
             color: #87CEEB;
+        }
+
+        .active {
+            color: #42bdee;
+            transform: scale(1.2);
         }
     }
 

@@ -1,5 +1,16 @@
 import { ElMessage } from 'element-plus'
 const namespace = 'users'  // 设置命名空间
+/**
+ * 
+ * @param {string} message 
+ * @param {number} code 
+ * code 
+ *      200 => 需要提示
+ *      300 => 成功但不需要提示
+ *      400 => 警告信息
+ *      401 => 身份验证失败
+ *      404 => Not found
+ */
 function message(message, code = 200) {
 
     if (code === 200 && message) {
@@ -8,13 +19,8 @@ function message(message, code = 200) {
             message
         })
 
-    } else if (code === 300 && message) {
-
-        ElMessage({
-            type: 'info',
-            message
-        })
-    } else if (code === 400 && message) {
+    }
+    else if (code === 400 && message) {
         ElMessage({
 
             type: 'warning',
@@ -25,10 +31,8 @@ function message(message, code = 200) {
             type: 'error',
             message
         })
-    }
-    else if (code == 404) {
+    } else if (code == 404 && message) {
         ElMessage({
-
             type: 'error',
             message: '404 Not Found'
         })

@@ -5,7 +5,7 @@ import router from './router'
 import '@/assets/reset.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import 'element-plus/theme-chalk/display.css'
-
+import 'animate.css'
 const app = createApp(App)
 const pinpa = createPinia()
 
@@ -14,4 +14,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 app.use(pinpa)
 app.use(router)
+
+
 app.mount('#app')

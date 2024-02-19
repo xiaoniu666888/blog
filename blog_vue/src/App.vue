@@ -9,7 +9,7 @@ import MsgView from './components/MsgView.vue';
   <canvas-view></canvas-view>
   <msg-view></msg-view>
   <div class="app">
-    <main>
+    <main class="animate__animated animate__backInDown">
       <router-view></router-view>
     </main>
   </div>

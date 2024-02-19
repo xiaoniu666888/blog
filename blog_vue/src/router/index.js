@@ -18,6 +18,7 @@ const routes = [
             },
             {
                 path: 'article',
+                name: 'article',
                 component: () => import('../views/ArticleView.vue')
             },
 
@@ -41,6 +42,11 @@ const routes = [
                 path: 'info',
                 name: 'info',
                 component: () => import('../views/InfoView.vue')
+            },
+            {
+                path: 'detail/:id',
+                name: 'detail',
+                component: () => import('../views/ArticleDetailView.vue')
             },
         ]
     },
