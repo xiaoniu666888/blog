@@ -1,3 +1,4 @@
+// 格式化时间
 import dayjs from 'dayjs'
 const date = function (time) {
     const fmtdate = dayjs(time)

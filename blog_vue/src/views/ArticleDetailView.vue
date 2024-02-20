@@ -75,7 +75,6 @@ const route = useRoute()
     </div>
 </template>
  
- 
 <style lang="scss" scoped>
 #article_detail {
     .article_info {

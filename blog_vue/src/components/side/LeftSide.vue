@@ -101,7 +101,7 @@ const popularTitle = reactive([
             <el-card>
                 <template #header>
                     <div class="card-header">
-                        <span style="color: #49b2db; font-size: 18px; font-weight: 600;">热门文章</span>
+                        <span style="color: #49b2db; font-size: 18px; font-weight: 600;">推荐文章</span>
                     </div>
                 </template>
 

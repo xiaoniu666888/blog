@@ -1,10 +1,10 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router';
-import { userStore } from '@/stores/users'
-import { local } from '@/utils';
+import { articleListStore, userStore } from '@/stores/users'
 
 const useStore = userStore()
+const useArticleStore = articleListStore()
 // 默认头像地址
 const avaUrl = ref("/api/images/default.jpg")
 // 导航栏数据
@@ -47,15 +47,14 @@ const handleInfo = () => {
 // 退出登录
 const handleExit = () => {
     router.push({ path: '/' })
-    local.delete('userInfo')
     useStore.delUserInfo()
+    useArticleStore.delArticleList()
 }
 // 点击导航栏
 const handleCilckNav = (index) => {
     currentIndex.value = index
 }
 </script>
-
 
 <template>
     <header class="top-nav center">
