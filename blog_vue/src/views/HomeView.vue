@@ -8,10 +8,7 @@ import RightSide from '@/components/side/RightSide.vue';
 <template>
     <div id="home">
         <header>
-            <div class="center">
-
-                <header-view></header-view>
-            </div>
+            <header-view></header-view>
         </header>
 
         <main>
@@ -33,40 +30,6 @@ import RightSide from '@/components/side/RightSide.vue';
 </template>
 
 <style lang="scss" scoped>
-// .content {
-//     display: flex;
-//     justify-content: space-between;
-//     padding-top: 2vh;
-//     // height: calc(100vh - 50px);
-//     box-sizing: border-box;
-
-//     .leftSide {
-//         width: 20vw;
-//         text-align: center;
-//         border-right: 1px solid #87CEEB;
-//         padding-right: 5px;
-//         box-sizing: border-box;
-//     }
-
-//     .middle-content {
-//         flex: 1;
-//         box-sizing: border-box;
-
-//         .router-view {
-//             width: 100%;
-//         }
-//     }
-
-//     .rightSide {
-//         width: 25vw;
-//         text-align: center;
-//         border-left: 1px solid #87CEEB;
-//         padding-left: 5px;
-//         box-sizing: border-box;
-//     }
-// }
-
-
 .content {
     display: flex;
     justify-content: space-between;
@@ -88,18 +51,24 @@ import RightSide from '@/components/side/RightSide.vue';
     width: 20vw;
     text-align: center;
     border-right: 1px solid #87CEEB;
-    padding-right: 5px;
     box-sizing: border-box;
     /* 设置最小高度以避免在内容较少时折叠 */
     min-height: 0;
+
 }
 
 .middle-content {
+
     flex: 1;
     box-sizing: border-box;
+    // // background: linear-gradient(to right, #9fe1fa, #f4edc9);
+    // background: radial-gradient(circle, #f4edc9, #6ccdf0);
 
     .router-view {
+
         width: 100%;
+
+
     }
 
     /* 为中间部分设置最小高度，避免在内容较少时折叠 */
@@ -114,6 +83,7 @@ import RightSide from '@/components/side/RightSide.vue';
     box-sizing: border-box;
     /* 设置最小高度以避免在内容较少时折叠 */
     min-height: 0;
+
 }
 </style>
 

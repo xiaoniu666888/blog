@@ -57,7 +57,7 @@ const handleCilckNav = (index) => {
 </script>
 
 <template>
-    <header class="top-nav center">
+    <header class="top-nav">
         <div class="title hidden-xs-only" @click="ToHome">
             🚀 Xiaoniu Blog
         </div>
@@ -104,17 +104,19 @@ const handleCilckNav = (index) => {
 
 <style lang="scss" scoped>
 .top-nav {
+    // width: 100vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 50px;
     line-height: 50px;
-    background-color: #fff;
-    box-shadow: 0px 0px 5px 3px #eee;
     flex-wrap: nowrap;
+    // background: linear-gradient(to right, #c2e5f2, #f2efe1);
+    box-sizing: border-box;
+    padding: 0 1vw;
 
     .title {
-        color: #42bdee;
+        color: #676767;
         cursor: pointer;
         padding-right: 40px;
         box-sizing: border-box;

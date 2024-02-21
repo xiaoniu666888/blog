@@ -48,16 +48,18 @@ onMounted(() => {
         <!-- 日历 -->
         <div class="calendar">
             <el-config-provider :locale="locale">
-                <el-calendar>
-                    <template #header="{ date }">
+                <el-calendar style="background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%)
+;margin: 0; padding: 0;
+">
+                    <!-- <template #header="{ date }">
                         <el-button-group>
                             <span>{{ date }}</span>
                         </el-button-group>
-                    </template>
+                    </template> -->
                 </el-calendar>
             </el-config-provider>
         </div>
-
+        <p class="player_title">音乐随心听</p>
         <!-- 播放器 -->
         <div id="player">
 
@@ -71,17 +73,28 @@ onMounted(() => {
 .right {
     width: 100%;
     height: 100%;
-    position: relative;
-    // overflow-y: scroll;
+    // position: relative;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    // justify-content: left;
+    align-items: left;
 
     .calendar {
         width: 100%;
-        border-bottom: 2px solid #eee;
+
         box-sizing: border-box;
     }
 
+    .player_title {
+        font-size: 20px;
+        color: #676767;
+        margin-bottom: 1vh;
+    }
+
     #player {
-        width: 20vw;
+        width: 100%;
+        background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);
     }
 
 

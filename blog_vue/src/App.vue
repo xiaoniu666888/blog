@@ -1,12 +1,10 @@
 <script setup>
-import CanvasView from './components/CanvasView.vue';
+
 import MsgView from './components/MsgView.vue';
-// import { getToken } from '@/api'
+
 </script>
 
 <template>
-  <!-- <el-button @click="getToken">token</el-button> -->
-  <canvas-view></canvas-view>
   <msg-view></msg-view>
   <div class="app">
     <main class="animate__animated animate__backInDown">
@@ -17,8 +15,12 @@ import MsgView from './components/MsgView.vue';
 
 <style  lang="scss" scoped>
 :global(.center) {
-  max-width: 95vw;
+  max-width: 98vw;
   margin: 0 auto;
   box-sizing: border-box;
+}
+
+.app {
+  background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%)
 }
 </style>

@@ -63,13 +63,12 @@ const route = useRoute()
                         <PriceTag />
                     </el-icon> {{ articleDetail.selectedTag }}
                 </span>
-
-
             </span>
         </header>
 
         <main class="md_view">
-            <md-preview v-model="text" style="width: 100%; box-sizing: border-box;" />
+            <md-preview v-model="text" style="width: 100%; box-sizing: border-box;background: linear-gradient(to right, #9fe1fa, #f4edc9);
+" />
         </main>
 
     </div>
@@ -77,6 +76,10 @@ const route = useRoute()
  
 <style lang="scss" scoped>
 #article_detail {
+    min-height: 100%;
+    background: linear-gradient(to right, #9fe1fa, #f4edc9);
+    box-sizing: border-box;
+
     .article_info {
 
         text-align: center;
@@ -88,6 +91,7 @@ const route = useRoute()
             font-size: 26px;
             font-weight: 600;
             padding: 2vh 0;
+            box-sizing: border-box;
 
 
         }

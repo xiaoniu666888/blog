@@ -113,12 +113,14 @@ function handleCurrentChange(newPage) {
 <style scoped>
 #article-view {
     width: 100%;
+    overflow-x: hidden;
 
     .article {
         display: flex;
-        width: 45vw;
+        /* width: 45vw; */
         height: 25vh;
-        margin: 1vw auto;
+        margin: 0 2vw;
+        margin-bottom: 2vh;
         box-sizing: border-box;
         align-items: center;
         box-shadow: 0px 0px 5px 2px #efe3e3;

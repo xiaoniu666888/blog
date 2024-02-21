@@ -61,7 +61,7 @@ const popularTitle = reactive([
 <template>
     <div class="left">
         <header class="header">
-            <el-card>
+            <el-card style="background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);">
                 <template #header>
                     <div class="card-header">
                         <span class="username" style=""> {{
@@ -83,10 +83,11 @@ const popularTitle = reactive([
                 <!-- 分类 -->
                 <div class="my-blog">
                     <div class="tags">
-                        <el-card>
+                        <el-card
+                            style="background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);">
                             <template #header>
                                 <div class="card-header">
-                                    <span style="color: #49b2db; font-size: 18px; font-weight: 600;">博客分类</span>
+                                    <span style="color: #676767; font-size: 18px; font-weight: 600;">博客分类</span>
                                 </div>
                             </template>
                             <el-tag class="tag" v-for="(item, index) in tags" :key="index" :type="item.type">{{
@@ -98,10 +99,10 @@ const popularTitle = reactive([
             </div>
         </main>
         <footer class="footer">
-            <el-card>
+            <el-card style="background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);">
                 <template #header>
                     <div class="card-header">
-                        <span style="color: #49b2db; font-size: 18px; font-weight: 600;">推荐文章</span>
+                        <span style="color: #676767; font-size: 18px; font-weight: 600;">推荐文章</span>
                     </div>
                 </template>
 
@@ -129,7 +130,7 @@ const popularTitle = reactive([
         width: 100%;
 
         .username {
-            color: #49b2db;
+            color: #676767;
             font-size: 24px;
             font-weight: 600;
         }
