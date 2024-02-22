@@ -1,7 +1,7 @@
 <template>
     <canvas ref="canv" class="canvas hidden-xs-only"></canvas>
 </template>
-  
+
 <script  setup>
 import { onMounted, ref } from "vue"
 // 响应式
@@ -23,8 +23,12 @@ const initCanvas = (canvas) => {
         clearInterval(time)
         date = newDate
         data = []
-        canvas.width = width.value = document.documentElement.clientWidth;
-        canvas.height = height.value = document.documentElement.clientHeight;
+        if (canvas.width) {
+            canvas.width = width.value = document.documentElement.clientWidth;
+        }
+        if (canvas.height) {
+            canvas.height = height.value = document.documentElement.clientHeight;
+        }
         init(); //初始化
     }
 };

@@ -25,17 +25,13 @@ onMounted(() => {
                 artist: '就是南方凯',
                 url: 'https://music.163.com/song/media/outer/url?id=2061978961.mp3',
                 cover: 'https://p2.music.126.net/MgrERz_auwIi5Km64TxwjQ==/109951169154658797.jpg',
-                lrc: 'lrc1.lrc',
-                theme: '#ebd0c2'
             },
             {
                 name: '悬溺',
                 artist: '葛东琪',
                 url: 'https://music.163.com/song/media/outer/url?id=1397345903.mp3',
                 cover: 'https://p2.music.126.net/CDhYcShQKH2VAMENuCxWWQ==/109951164166513349.jpg',
-                lrc: 'lrc2.lrc',
-                theme: '#46718b'
-            }
+            },
         ]
     });
 })
@@ -95,6 +91,8 @@ onMounted(() => {
     #player {
         width: 100%;
         background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);
+        text-align: left;
+        overflow-y: auto;
     }
 
 

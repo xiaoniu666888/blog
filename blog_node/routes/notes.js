@@ -62,7 +62,6 @@ router.post('/file', (ctx, next) => {
 router.post('/checktitle', async (ctx, next) => {
     try {
         const { title } = ctx.request.body
-        console.log(title);
         let res = await Note.findOne({ title })
         // 标题重复
         if (res) return ctx.body = util.fail('标题已存在', 400)

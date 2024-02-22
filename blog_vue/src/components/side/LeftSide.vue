@@ -1,9 +1,9 @@
 <script setup>
 import { userStore } from '@/stores/users';
-import { reactive, ref } from 'vue';
+import { local } from '@/utils';
+import { reactive } from 'vue';
 const useStore = userStore()
-// 默认头像地址
-const avaUrl = ref("/api/images/default.jpg")
+const token = local.get("userInfo")
 const tags = reactive([
     {
         tag: 'html',
@@ -37,16 +37,10 @@ const tags = reactive([
         type: 'success'
     }
 ])
-
-// 个人介绍
-
-const introduction = ref('00后一枚，热爱前端，热爱技术，喜欢钓鱼，目前学习前端两年半，芜湖~')
-
+// 介绍假数据
 const popularTitle = reactive([
     {
         title: "HTML，一门赋予网站内容结构和意义的语言"
-
-
     },
     {
         title: "CSS，一门美化网站页面的语言"
@@ -60,24 +54,25 @@ const popularTitle = reactive([
 
 <template>
     <div class="left">
+        <!-- 头部 -->
         <header class="header">
             <el-card style="background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);">
                 <template #header>
                     <div class="card-header">
                         <span class="username" style=""> {{
-                            useStore.userInfo.username }}</span>
-
+                            useStore.userInfo.nickname || "游客" }} </span>
                     </div>
                 </template>
-                <el-avatar :size="60" :src="'/api' + useStore.userInfo.userImg || avaUrl" />
+                <el-avatar v-if="token" :size="60" :src="'/api' + useStore.userInfo.userImg || '/imgs/avatar.jpg'" />
+                <el-avatar v-else :size="60" src='/imgs/avatar.jpg' />
                 <template #footer>
                     <p class="introduction">
-                        {{ introduction }}
+                        {{ useStore.userInfo.introduction || '暂无介绍' }}
                     </p>
                 </template>
-
             </el-card>
         </header>
+        <!-- 中间 -->
         <main class="main">
             <div class="personInfo">
                 <!-- 分类 -->
@@ -98,6 +93,7 @@ const popularTitle = reactive([
                 <!--  -->
             </div>
         </main>
+        <!-- 底部 -->
         <footer class="footer">
             <el-card style="background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);">
                 <template #header>
@@ -108,9 +104,7 @@ const popularTitle = reactive([
 
                 <div v-for="item in popularTitle" :key="item" class="popular-title text item">{{ item.title }}</div>
             </el-card>
-
         </footer>
-
     </div>
 </template>
 
@@ -118,13 +112,11 @@ const popularTitle = reactive([
 <style lang="scss" scoped>
 .left {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    // overflow-y: hidden;
-    // overflow-y: scroll;
 
     .header {
         width: 100%;
@@ -137,16 +129,13 @@ const popularTitle = reactive([
 
         .introduction {
             text-align: left;
-            text-indent: 2em;
             letter-spacing: 1.5px;
             line-height: 20px;
-            // color: #7CCA54;
         }
     }
 
     .main {
         width: 100%;
-        // flex: 1;
 
         .personInfo {
             display: flex;
@@ -157,8 +146,6 @@ const popularTitle = reactive([
             .my-blog {
                 width: 100%;
                 text-align: center;
-
-                // padding-bottom: 10px;
 
                 .tags {
                     width: 100%;
@@ -182,8 +169,6 @@ const popularTitle = reactive([
 
             }
         }
-
-
     }
 
     .footer {

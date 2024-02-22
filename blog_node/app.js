@@ -61,7 +61,7 @@ app.use(async (ctx, next) => {
 // 拦截
 app.use(koaJwt({ secret: '#xiaoniu$' }).unless({
   // 过滤注册登录接口，不进行token校验
-  path: [/^\/users\/login/, /^\/users\/reg/]
+  path: [/^\/users\/login/, /^\/users\/reg/, /^\/articles\/.*$/]
 }))
 
 // routes

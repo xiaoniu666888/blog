@@ -100,7 +100,7 @@ const onSubmit = (formEl) => {
                 notefile.value.submit();
             }
             setTimeout(async () => {
-                upNoteInfo({ ...form, noteAuthor: useStore.userInfo.username }).then((res) => {
+                upNoteInfo({ ...form, noteAuthor: useStore.userInfo.nickname }).then((res) => {
                     if (res) {
                         reset()
                         loading.value = !loading.value

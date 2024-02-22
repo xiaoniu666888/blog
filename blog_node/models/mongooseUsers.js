@@ -7,7 +7,9 @@ const mongooUser = new mongoose.Schema(
         username: String,
         password: String,
         userDate: Date,
-        userImg: String
+        userImg: String,
+        nickname: String,
+        introduction: String
     }
     , {
         // 去除版本号

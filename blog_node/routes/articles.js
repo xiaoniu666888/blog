@@ -15,7 +15,7 @@ router.get('/article', async (ctx, next) => {
     const { page, skipNum } = util.pager(ctx.request.query)
     let params = {}
     if (!noteAuthor) {
-        params.noteAuthor = 'xiaoniu'
+        params.noteAuthor = 'admin'
     } else {
         params.noteAuthor = noteAuthor
     }

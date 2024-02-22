@@ -1,5 +1,4 @@
 <script setup>
-import CanvasView from '@/components/CanvasView.vue';
 import { useRouter } from 'vue-router'
 import { message, local } from '@/utils';
 import { reactive, ref } from 'vue'
@@ -146,9 +145,8 @@ const goReg = () => {
 
 
 <template>
-    <canvas-view></canvas-view>
-
     <div class="login center">
+
 
         <div class="login-container">
             <!-- 登录 -->

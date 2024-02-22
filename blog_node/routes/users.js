@@ -3,15 +3,9 @@ const User = require('../models/mongooseUsers')
 const util = require('../utils')
 const path = require('path')
 const fs = require('fs')
+// 路由前缀
 router.prefix('/users')
 
-router.get('/', function (ctx, next) {
-  ctx.body = 'this is a users response!'
-})
-
-router.get('/bar', function (ctx, next) {
-  ctx.body = 'this is a users/bar response'
-})
 /**  
  * @swagger  
  * /users/reg:  
@@ -50,7 +44,7 @@ router.get('/bar', function (ctx, next) {
  *         description: 服务器错误  
  */
 router.post('/reg', async function (ctx, next) {
-  const { username, password } = ctx.request.body
+  const { username, password, nickname } = ctx.request.body
   const res = await User.findOne({ username })
   if (res) {
     console.log(res);
@@ -61,6 +55,7 @@ router.post('/reg', async function (ctx, next) {
   await User.create({
     username,
     password,
+    nickname,
     userDate: Date.now(),
     userImg: '/images/default.jpg' // public文件夹
   })
@@ -70,7 +65,7 @@ router.post('/reg', async function (ctx, next) {
 // 登录
 router.post('/login', async function (ctx, next) {
   const { username, password } = ctx.request.body
-  const res = await User.findOne({ username, password }, 'username userDate userImg')
+  const res = await User.findOne({ username, password }, ' username nickname userDate userImg introduction')
   if (res) {
     const data = res._doc
     let tokenData = util.setToken(data)
@@ -83,22 +78,6 @@ router.post('/login', async function (ctx, next) {
   }
 
 })
-
-
-// token
-router.get('/token', async function (ctx, next) {
-
-  if (ctx.request.headers.authorization) {
-    const header = ctx.request.headers.authorization
-    const data = await util.verifyToken(header)
-
-    ctx.body = util.success('token请求成功', data)
-  }
-  else {
-    console.log(666);
-  }
-})
-
 
 // 修改头像
 router.post('/avatar', async function (ctx, next) {
@@ -143,6 +122,46 @@ router.post('/avatar', async function (ctx, next) {
       reject(err);
     });
   });
+})
+
+// 修改信息
+router.post('/info', async function (ctx, next) {
+  const { nickname, introduction, id: _id } = ctx.request.body
+  let params = {};
+  try {
+    if (nickname) params.nickname = nickname;
+    if (introduction) params.introduction = introduction
+    const res = await User.findByIdAndUpdate(_id, { ...params }, { password: 0 })
+    // 更新token
+    if (!res) return
+    const data = res._doc
+    data.nickname = nickname
+    data.introduction = introduction
+    let tokenData = util.setToken({ token: data })
+    data.token = tokenData
+    // 文件保存成功  
+    return ctx.body = util.success('修改成功', data)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
+// 修改密码
+router.post('/psd', async function (ctx, next) {
+  const { password, newPassword, _id } = ctx.request.body
+  if (!password || !newPassword) return
+  try {
+    const bol = await User.findById(_id)
+    if (password !== bol.password) {
+      return ctx.body = util.fail("原密码输入错误")
+    } else {
+      await User.findByIdAndUpdate(_id, { password: newPassword })
+    }
+    return ctx.body = util.success("修改成功", {})
+  } catch (error) {
+    console.error(error)
+  }
+
 })
 
 module.exports = router

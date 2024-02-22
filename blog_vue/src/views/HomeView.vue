@@ -51,9 +51,11 @@ import RightSide from '@/components/side/RightSide.vue';
     width: 20vw;
     text-align: center;
     border-right: 1px solid #87CEEB;
+    padding-right: 5px;
     box-sizing: border-box;
     /* 设置最小高度以避免在内容较少时折叠 */
-    min-height: 0;
+    min-height: 100%;
+
 
 }
 

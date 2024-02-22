@@ -15,17 +15,26 @@ export function userLogin(data) {
     })
 }
 
-// 验证token
-export function getToken() {
-    return xnRequestOne.get({
-        url: '/users/token'
-    })
-}
-
 // 上传头像
 export function uploadAvatar(data) {
     return xnRequestOne.post({
         url: '/users/avatar',
+        data
+    })
+}
+
+// 修改信息
+export function editUserInfo(data) {
+    return xnRequestOne.post({
+        url: '/users/info',
+        data
+    })
+}
+
+// 修改密码
+export function updatePsd(data) {
+    return xnRequestOne.post({
+        url: '/users/psd',
         data
     })
 }

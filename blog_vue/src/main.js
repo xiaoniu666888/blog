@@ -12,8 +12,8 @@ const pinpa = createPinia()
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
-app.use(pinpa)
 app.use(router)
+app.use(pinpa)
 
 
 app.mount('#app')

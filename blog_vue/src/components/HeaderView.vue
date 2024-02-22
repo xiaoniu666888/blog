@@ -4,14 +4,17 @@ import { useRouter } from 'vue-router';
 import { articleListStore, userStore } from '@/stores/users'
 
 const useStore = userStore()
+const router = useRouter()
+
 const useArticleStore = articleListStore()
+
 // 默认头像地址
 const avaUrl = ref("/api/images/default.jpg")
 // 导航栏数据
 const navTitles = reactive([
     {
         title: "首页",
-        path: '/home',
+        path: '/home/welcome',
         icon: 'house'
     },
     {
@@ -33,9 +36,7 @@ const navTitles = reactive([
     },
 
 ])
-const router = useRouter()
-// 当前导航
-const currentIndex = ref()
+
 // 点击logo
 const ToHome = () => {
     router.push({ path: '/' })
@@ -50,10 +51,7 @@ const handleExit = () => {
     useStore.delUserInfo()
     useArticleStore.delArticleList()
 }
-// 点击导航栏
-const handleCilckNav = (index) => {
-    currentIndex.value = index
-}
+
 </script>
 
 <template>
@@ -63,8 +61,8 @@ const handleCilckNav = (index) => {
         </div>
         <div class="nav-list">
             <template v-for="(item, index) in navTitles" :key="index">
-                <router-link @click="handleCilckNav(index)" :to="item.path" style="text-decoration: none;">
-                    <span :class="['nav-title', currentIndex === index && 'active']">
+                <router-link :to="item.path" style="text-decoration: none;" class='nav-title' active-class="active">
+                    <span>
                         <el-icon class="icons hidden-xs-only">
                             <component :is="item.icon" />
                         </el-icon>
@@ -96,9 +94,6 @@ const handleCilckNav = (index) => {
             </router-link>
         </div>
     </header>
-    <main>
-
-    </main>
 </template>
 
 
