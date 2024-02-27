@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref, reactive } from 'vue';
-import { userStore, articleListStore } from '@/stores/users';
+import { userStore, articleListStore } from '@/stores';
 import { getArticle } from '@/api/articles'
 import { useRouter } from 'vue-router';
 import fmtdate from '@/utils/fmtdate';
@@ -193,3 +193,4 @@ function handleCurrentChange(newPage) {
 </style>
 
 
+@/stores

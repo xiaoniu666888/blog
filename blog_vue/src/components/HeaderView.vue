@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router';
-import { articleListStore, userStore } from '@/stores/users'
+import { articleListStore, userStore } from '@/stores'
 
 const useStore = userStore()
 const router = useRouter()
@@ -200,4 +200,4 @@ const handleExit = () => {
     background-color: #eee;
     color: #87CEEB;
 }
-</style>
+</style>@/stores

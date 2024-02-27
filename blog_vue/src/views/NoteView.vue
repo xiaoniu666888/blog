@@ -1,7 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue'
-// import { message } from '@/utils'
-import { userStore } from '@/stores/users'
+import { userStore } from '@/stores'
 import { upNoteInfo, checkTitle } from '@/api/notes'
 const useStore = userStore()
 const noteForm = ref()
@@ -218,4 +217,4 @@ const reset = () => {
     }
 
 }
-</style>
+</style>@/stores

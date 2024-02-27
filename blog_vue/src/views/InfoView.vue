@@ -1,5 +1,5 @@
 <script setup>
-import { userStore } from '@/stores/users';
+import { userStore } from '@/stores';
 import { local, message } from '@/utils';
 
 import { reactive, ref } from 'vue';
@@ -240,4 +240,4 @@ const handleSubmitPsd = (formEl) => {
         font-weight: 600;
     }
 }
-</style>
+</style>@/stores

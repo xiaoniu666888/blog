@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router'
 import { message, local } from '@/utils';
 import { reactive, ref } from 'vue'
 import { userReg, userLogin } from '@/api'
-import { userStore } from '@/stores/users'
+import { userStore } from '@/stores'
 const useStore = userStore()
 const router = useRouter()
 // 登录
@@ -279,4 +279,4 @@ const goReg = () => {
     transform: translateX(-23vw);
     opacity: 1;
 }
-</style>
+</style>@/stores

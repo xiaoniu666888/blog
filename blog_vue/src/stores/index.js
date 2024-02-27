@@ -20,7 +20,7 @@ export const userStore = defineStore('users', {
 export const articleListStore = defineStore('articlelist', {
   state: () => {
     return {
-      articleList: local.get('articleList') || []
+      articleList: local.get('articleList') || [],
     }
   },
   actions: {

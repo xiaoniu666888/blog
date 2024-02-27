@@ -1,23 +1,29 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router'
 import { MdPreview } from 'md-editor-v3';
 import { getArticleDetail } from '@/api/articles'
 import 'md-editor-v3/lib/style.css';
 import fmtdate from '@/utils/fmtdate';
+const route = useRoute()
 
-onMounted(async () => {
+onMounted(() => {
+    getDetail()
+})
+watch(route, () => {
+    getDetail()
+})
+const getDetail = async () => {
     const { id } = route.params
     const res = await getArticleDetail({ id })
     if (res) {
         articleDetail.value = { ...res }
         text.value = res.detail
-        // console.log(articleDetail.value.selectedType.type);
     } else {
         return false
     }
+}
 
-})
 const publishTime = computed(() => {
     return fmtdate(articleDetail.value.noteUpDate)
 })
@@ -36,7 +42,6 @@ const articleDetail = ref(
         }
     }
 )
-const route = useRoute()
 
 
 </script>

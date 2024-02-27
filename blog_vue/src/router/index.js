@@ -59,6 +59,10 @@ const routes = [
             {
                 path: 'info',
                 name: 'info',
+                meta: {
+                    title: '个人信息',
+                    islogin: true
+                },
                 component: () => import('../views/InfoView.vue')
             },
             {

@@ -7,7 +7,7 @@ const Note = require('../models/mongooseNotes')
 // 路由前缀 
 router.prefix('/articles')
 
-// 获取文章
+// 获取文章列表
 router.get('/article', async (ctx, next) => {
 
     // 根据作者获取

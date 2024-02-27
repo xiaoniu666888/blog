@@ -1,8 +1,11 @@
 <script setup>
-import { userStore } from '@/stores/users';
+import { userStore, articleListStore } from '@/stores';
 import { local } from '@/utils';
-import { reactive } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
+import { useRouter } from 'vue-router'
 const useStore = userStore()
+const useArticleStore = articleListStore()
+const router = useRouter()
 const token = local.get("userInfo")
 const tags = reactive([
     {
@@ -38,17 +41,34 @@ const tags = reactive([
     }
 ])
 // 介绍假数据
-const popularTitle = reactive([
-    {
-        title: "HTML，一门赋予网站内容结构和意义的语言"
-    },
-    {
-        title: "CSS，一门美化网站页面的语言"
-    },
-    {
-        title: "JavaScript，用来为网站创建动态功能的脚本语言"
+const popularTitle = ref([])
+onMounted(() => {
+    if (useArticleStore.articleList < 3) {
+        popularTitle.value = [
+            {
+                title: '暂无'
+            }
+        ]
     }
-])
+    popularTitle.value = useArticleStore.articleList.slice(0, 3)
+
+})
+
+// 点击标题跳转
+const handleClickArticleTitle = (id) => {
+    if (id) {
+        router.push(
+            {
+                name: 'detail',
+                params: {
+                    id
+                }
+            }
+        )
+    } else {
+        throw new Error("跳转id不存在")
+    }
+}
 </script>
 
 
@@ -101,8 +121,8 @@ const popularTitle = reactive([
                         <span style="color: #676767; font-size: 18px; font-weight: 600;">推荐文章</span>
                     </div>
                 </template>
-
-                <div v-for="item in popularTitle" :key="item" class="popular-title text item">{{ item.title }}</div>
+                <div @click="handleClickArticleTitle(item?._id)" v-for="item in popularTitle" :key="item"
+                    class="popular-title text item">{{ item?.title }}</div>
             </el-card>
         </footer>
     </div>
@@ -165,8 +185,6 @@ const popularTitle = reactive([
                     }
 
                 }
-
-
             }
         }
     }
@@ -182,16 +200,15 @@ const popularTitle = reactive([
             white-space: nowrap;
             /* 设置溢出内容隐藏 */
             overflow: hidden;
-
             /* 设置溢出内容以省略号显示 */
             text-overflow: ellipsis;
         }
 
         .popular-title:hover {
             background-color: #aaddf1;
-            transform: scale(1.1);
-
+            transform: scale(1.2);
+            box-shadow: 0px 0px 2px 2px #87CEEB;
         }
     }
 }
-</style>
+</style>@/stores
