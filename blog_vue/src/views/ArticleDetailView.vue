@@ -60,7 +60,7 @@ const articleDetail = ref(
                 <span>
                     <el-icon style="vertical-align: middle; transform: translateY(-1.5px);">
                         <Folder />
-                    </el-icon> {{ articleDetail.selectedType.type }}
+                    </el-icon> {{ articleDetail.selectedType }}
                 </span>
                 |
                 <span>

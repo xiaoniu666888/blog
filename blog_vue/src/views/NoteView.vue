@@ -10,7 +10,7 @@ const loading = ref(false)
 const form = reactive({
     title: '',
     desc: '',
-    selectedType: {},
+    selectedType: '',
     selectedTag: '',
     noteImgUrl: '',
     noteFileUrl: ''
@@ -46,7 +46,8 @@ const fliteredTags = ref([])
 // 选择分类
 const getTypes = (event) => {
     form.selectedTag = ''
-    fliteredTags.value = event.tags
+    const res = types.filter(item => item.type === event)
+    fliteredTags.value = res[0].tags
 }
 
 // 文章缩略图
@@ -138,7 +139,7 @@ const reset = () => {
 
             <el-form-item label="文章分类" prop="selectedType">
                 <el-select v-model="form.selectedType" value-key="id" placeholder="请选择分类" @change="getTypes($event)">
-                    <el-option v-for="item in types" :label="item.type" :key="item.id" :value="item" />
+                    <el-option v-for="item in types" :label="item.type" :key="item.id" :value="item.type" />
                 </el-select>
             </el-form-item>
 

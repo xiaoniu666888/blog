@@ -5,7 +5,7 @@ const mongooNote = new mongoose.Schema(
     {
         title: String, // 标题
         desc: String, // 描述
-        selectedType: Object, // 分类
+        selectedType: String, // 分类
         selectedTag: String, // 标签
         noteImgUrl: String, // 缩略图地址
         noteFileUrl: String, // 文件保存地址

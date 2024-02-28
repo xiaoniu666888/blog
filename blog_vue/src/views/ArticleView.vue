@@ -85,7 +85,7 @@ function handleCurrentChange(newPage) {
                             <el-icon style="vertical-align: middle; transform: translateY(-1.5px);">
                                 <Folder />
                             </el-icon>
-                            {{ item.selectedType.type }}
+                            {{ item.selectedType }}
                         </span> |
                         <span>
                             <el-icon style="vertical-align: middle; transform: translateY(-1.5px);">

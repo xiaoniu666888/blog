@@ -71,4 +71,46 @@ router.get('/detail', async (ctx, next) => {
     }
 })
 
+// 获取文章标签
+router.get('/tags', async (ctx, next) => {
+    // 根据作者获取
+    const { noteAuthor } = ctx.request.query
+    let params = {}
+    if (!noteAuthor) {
+        params.noteAuthor = 'admin'
+    } else {
+        params.noteAuthor = noteAuthor
+    }
+
+    try {
+        let tagList = []
+        const tags = await Note.find(params, { selectedTag: 1, _id: 0 }).sort({ _id: -1 })
+        if (!tags) return ctx.body = util.fail("未找到")
+        for (let tag of tags) {
+            tagList.push(tag.selectedTag)
+        }
+        // 去重,同样的标签只返回一个
+        ctx.body = util.success('查询成功', [...new Set(tagList)], 300)
+
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+// 根据标签获取文章列表
+router.get('/bytag', async (ctx, next) => {
+    const { tag } = ctx.request.query
+    if (!tag) return
+    try {
+        const articleList = await Note.find({ selectedTag: tag })
+        if (!articleList) return ctx.body = util.fail("获取文章列表失败")
+        if (articleList) {
+            return ctx.body = util.success("获取文章列表成功", articleList, 300)
+        }
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+
 module.exports = router

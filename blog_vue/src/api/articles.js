@@ -19,3 +19,19 @@ export function getArticleDetail(params) {
         params
     })
 }
+
+// 获取文章的标签
+export function getArticleTags(params) {
+    return xnRequestOne.get({
+        url: '/articles/tags',
+        params
+    })
+}
+
+// 根据标签获取文章列表
+export function getArticleListByTag(params) {
+    return xnRequestOne.get({
+        url: '/articles/bytag',
+        params
+    })
+}

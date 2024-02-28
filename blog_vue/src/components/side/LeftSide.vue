@@ -1,45 +1,14 @@
 <script setup>
 import { userStore, articleListStore } from '@/stores';
 import { local } from '@/utils';
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router'
+import { getArticleTags, getArticleListByTag } from '@/api/articles'
 const useStore = userStore()
 const useArticleStore = articleListStore()
 const router = useRouter()
 const token = local.get("userInfo")
-const tags = reactive([
-    {
-        tag: 'html',
-        type: 'success'
-    }, {
-        tag: 'css',
-        type: 'primary'
-    },
-    {
-        tag: 'js',
-        type: 'primary'
-    },
-    {
-        tag: 'vue',
-        type: 'success'
-    },
-    {
-        tag: 'node',
-        type: 'primary'
-    },
-    {
-        tag: 'mysql',
-        type: 'success'
-    },
-    {
-        tag: 'mysql',
-        type: 'success'
-    },
-    {
-        tag: 'mysql',
-        type: 'success'
-    }
-])
+const tags = ref([])
 // 介绍假数据
 const popularTitle = ref([])
 onMounted(() => {
@@ -51,9 +20,24 @@ onMounted(() => {
         ]
     }
     popularTitle.value = useArticleStore.articleList.slice(0, 3)
+    getTags()
 
 })
+// 获取文章标签
+const getTags = async () => {
 
+    const res = await getArticleTags({ noteAuthor: useStore.userInfo.username })
+    tags.value = res
+}
+// 点击标签
+const handleClickTag = async (tag) => {
+    let params = {};
+    if (tag) {
+        params.tag = tag
+        const res = await getArticleListByTag(params)
+        console.log(res);
+    }
+}
 // 点击标题跳转
 const handleClickArticleTitle = (id) => {
     if (id) {
@@ -69,6 +53,7 @@ const handleClickArticleTitle = (id) => {
         throw new Error("跳转id不存在")
     }
 }
+
 </script>
 
 
@@ -100,13 +85,17 @@ const handleClickArticleTitle = (id) => {
                     <div class="tags">
                         <el-card
                             style="background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);">
+
                             <template #header>
                                 <div class="card-header">
-                                    <span style="color: #676767; font-size: 18px; font-weight: 600;">博客分类</span>
+                                    <span style="color: #676767; font-size: 18px; font-weight: 600;">标签</span>
                                 </div>
                             </template>
-                            <el-tag class="tag" v-for="(item, index) in tags" :key="index" :type="item.type">{{
-                                item.tag }}</el-tag>
+
+                            <el-tag @click="handleClickTag(item)" class="tag" v-for="(item, index) in tags" :key="index">
+                                {{ item }}
+                            </el-tag>
+
                         </el-card>
                     </div>
                 </div>
