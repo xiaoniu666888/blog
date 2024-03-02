@@ -73,6 +73,14 @@ const routes = [
                 },
                 component: () => import('../views/ArticleDetailView.vue')
             },
+            {
+                path: 'tags',
+                name: 'tags',
+                meta: {
+                    title: '标签列表'
+                },
+                component: () => import('../views/TagView.vue')
+            },
         ]
     },
     {

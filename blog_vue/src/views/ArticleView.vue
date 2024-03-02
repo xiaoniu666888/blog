@@ -191,6 +191,3 @@ function handleCurrentChange(newPage) {
 
 }
 </style>
-
-
-@/stores

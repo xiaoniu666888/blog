@@ -1,9 +1,9 @@
 <script setup>
-import { userStore, articleListStore } from '@/stores';
-import { local } from '@/utils';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router'
-import { getArticleTags, getArticleListByTag } from '@/api/articles'
+import { userStore, articleListStore } from '@/stores';
+import { local } from '@/utils';
+import { getArticleTags } from '@/api/articles'
 const useStore = userStore()
 const useArticleStore = articleListStore()
 const router = useRouter()
@@ -25,18 +25,20 @@ onMounted(() => {
 })
 // 获取文章标签
 const getTags = async () => {
-
     const res = await getArticleTags({ noteAuthor: useStore.userInfo.username })
     tags.value = res
 }
 // 点击标签
 const handleClickTag = async (tag) => {
-    let params = {};
     if (tag) {
-        params.tag = tag
-        const res = await getArticleListByTag(params)
-        console.log(res);
+
+        router.push({
+            path: '/home/tags', query: {
+                tag
+            }
+        })
     }
+
 }
 // 点击标题跳转
 const handleClickArticleTitle = (id) => {
@@ -61,15 +63,16 @@ const handleClickArticleTitle = (id) => {
     <div class="left">
         <!-- 头部 -->
         <header class="header">
-            <el-card style="background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);">
+            <el-card
+                style="background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);">
                 <template #header>
                     <div class="card-header">
                         <span class="username" style=""> {{
                             useStore.userInfo.nickname || "游客" }} </span>
                     </div>
                 </template>
-                <el-avatar v-if="token" :size="60" :src="'/api' + useStore.userInfo.userImg || '/imgs/avatar.jpg'" />
-                <el-avatar v-else :size="60" src='/imgs/avatar.jpg' />
+                <el-avatar :size="60" :src="token && '/api' + useStore.userInfo.userImg || '/imgs/avatar.jpg'" />
+
                 <template #footer>
                     <p class="introduction">
                         {{ useStore.userInfo.introduction || '暂无介绍' }}
@@ -92,10 +95,10 @@ const handleClickArticleTitle = (id) => {
                                 </div>
                             </template>
 
-                            <el-tag @click="handleClickTag(item)" class="tag" v-for="(item, index) in tags" :key="index">
+                            <el-tag @click="handleClickTag(item)" class="tag" v-for="(item, index) in tags"
+                                :key="index">
                                 {{ item }}
                             </el-tag>
-
                         </el-card>
                     </div>
                 </div>
@@ -104,7 +107,9 @@ const handleClickArticleTitle = (id) => {
         </main>
         <!-- 底部 -->
         <footer class="footer">
-            <el-card style="background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);">
+            <el-card
+                style="background: radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%);">
+
                 <template #header>
                     <div class="card-header">
                         <span style="color: #676767; font-size: 18px; font-weight: 600;">推荐文章</span>
