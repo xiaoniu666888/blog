@@ -45,7 +45,7 @@ const articleDetail = ref(
 
 
 </script>
- 
+
 <template>
     <div id="article_detail">
         <header class="article_info">
@@ -78,7 +78,7 @@ const articleDetail = ref(
 
     </div>
 </template>
- 
+
 <style lang="scss" scoped>
 #article_detail {
     min-height: 100%;
@@ -116,5 +116,12 @@ const articleDetail = ref(
             }
         }
     }
+}
+
+
+.animate__animated,
+.animate__fadeInDown {
+    transition: none;
+    animation: none;
 }
 </style>

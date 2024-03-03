@@ -43,8 +43,6 @@ const handleToArticleDetail = (id) => {
     } else {
         throw new Error("跳转id不存在")
     }
-
-
 }
 
 // 初始化分页对象
@@ -61,6 +59,7 @@ function handleCurrentChange(newPage) {
     getArticleList()
 }  
 </script>
+
 <template>
     <div id="article-view">
         <!-- 文章列表 -->
@@ -102,15 +101,16 @@ function handleCurrentChange(newPage) {
         <!-- 分页器 -->
         <footer class="article_view_footer">
             <el-pagination background :total="pager.total" @current-change="handleCurrentChange"
-                v-model:current-change="pager.currentPage" v-model:page-size="pager.pageSize" :hide-on-single-page="true"
-                style="--el-color-primary: #00aaa2; display: inline-flex;" layout="prev, pager, next" />
+                v-model:current-change="pager.currentPage" v-model:page-size="pager.pageSize"
+                :hide-on-single-page="true" style="--el-color-primary: #00aaa2; display: inline-flex;"
+                layout="prev, pager, next" />
         </footer>
     </div>
 </template>
 
 
 
-<style scoped>
+<style lang="scss" scoped>
 #article-view {
     width: 100%;
     overflow-x: hidden;

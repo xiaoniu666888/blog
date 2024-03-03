@@ -1,9 +1,10 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { getArticleListByTag } from '@/api/articles'
 import fmtdate from '@/utils/fmtdate';
 const route = useRoute()
+const router = useRouter()
 const title = ref('')
 const articleList = ref([])
 onMounted(() => {
@@ -25,7 +26,18 @@ watch(route, () => {
     getAcvtileList()
 })
 const handleToArticleDetail = (id) => {
-    console.log(id);
+    if (id) {
+        router.push(
+            {
+                name: 'detail',
+                params: {
+                    id
+                }
+            }
+        )
+    } else {
+        throw new Error("跳转id不存在")
+    }
 } 
 </script>
 
@@ -34,10 +46,9 @@ const handleToArticleDetail = (id) => {
     <div>
         <div id="article-view">
             <h2 class="title">#{{ title }}</h2>
-
             <!-- 文章列表 -->
             <main class="main">
-                <div class="article" v-for="item in articleList" :key="item._id"
+                <div class="article animate__animated animate__backInLeft" v-for="item in articleList" :key="item._id"
                     @click="handleToArticleDetail(item._id)">
                     <div class="article_img">
                         <el-image style="width: 100%;
