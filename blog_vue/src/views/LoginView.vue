@@ -53,10 +53,6 @@ const validateRegUser = (rule, value, callback) => {
     if (value === '') {
         callback(new Error('请输入用户名'))
     } else {
-        // if (ruleRegForm.username !== '') {
-        //     if (!ruleRegFormRef.value) return
-        //     ruleRegFormRef.value.validateField('checkPass', () => null)
-        // }
         callback()
     }
 }
@@ -153,9 +149,9 @@ const goReg = () => {
 
 
             <transition mode="out-in" name="login">
-                <el-form style="background: linear-gradient(to right, #9fe1fa, #f4edc9); border-radius: 3%;" v-show="isReg"
-                    class="login-form demo-ruleForm" ref="ruleLoginFormRef" :model="ruleForm" status-icon :rules="rules"
-                    label-width="65px" label-position="top">
+                <el-form style="background: linear-gradient(to right, #9fe1fa, #f4edc9); border-radius: 3%;"
+                    v-show="isReg" class="login-form demo-ruleForm" ref="ruleLoginFormRef" :model="ruleForm" status-icon
+                    :rules="rules" label-width="65px" label-position="top">
                     <h2 class="loginTitle">用户登录</h2>
 
                     <el-form-item label="用户名" prop="username">
@@ -175,9 +171,9 @@ const goReg = () => {
 
             <!-- 注册 -->
             <transition mode="out-in" name="reg">
-                <el-form style="background: linear-gradient(to right, #9fe1fa, #f4edc9); border-radius: 3%;" v-show="!isReg"
-                    class="login-form reg-form demo-ruleForm" ref="ruleRegFormRef" :model="ruleRegForm" status-icon
-                    :rules="regRules" label-width="65px" label-position="top">
+                <el-form style="background: linear-gradient(to right, #9fe1fa, #f4edc9); border-radius: 3%;"
+                    v-show="!isReg" class="login-form reg-form demo-ruleForm" ref="ruleRegFormRef" :model="ruleRegForm"
+                    status-icon :rules="regRules" label-width="65px" label-position="top">
 
                     <h2 class="loginTitle">{{ isReg ? '用户登录' : '用户注册' }}</h2>
 
