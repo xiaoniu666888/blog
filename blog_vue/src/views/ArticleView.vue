@@ -11,7 +11,12 @@ const useArticleStore = articleListStore()
 const articleList = ref()
 
 onMounted(async () => {
-    getArticleList()
+    if (!useArticleStore.articleList.length) {
+        getArticleList()
+    } else {
+        articleList.value = useArticleStore.articleList
+        pager.total = useArticleStore.total
+    }
 })
 // 获取文章
 const getArticleList = async () => {
@@ -25,9 +30,11 @@ const getArticleList = async () => {
         articleList.value = list
         pager.total = page.total
         useArticleStore.saveArticleList(list)
+        useArticleStore.total = page.total
     } catch (error) {
         console.error(error)
     }
+    console.log(111);
 
 }
 const handleToArticleDetail = (id) => {

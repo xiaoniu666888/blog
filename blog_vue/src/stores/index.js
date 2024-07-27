@@ -1,34 +1,36 @@
-import { defineStore } from 'pinia'
-import { local } from '@/utils'
+import { defineStore } from "pinia"
+import { local } from "@/utils"
 // 用户信息store
-export const userStore = defineStore('users', {
+export const userStore = defineStore("users", {
   state: () => ({
-    userInfo: local.get('userInfo') || {}
+    userInfo: local.get("userInfo") || {}
   }),
   getters: {
     getUseInfo: (state) => state.userInfo
   },
   actions: {
     delUserInfo() {
-      local.delete('userInfo')
+      local.delete("userInfo")
       this.userInfo = {}
     }
   }
 })
 
 // 文章列表store
-export const articleListStore = defineStore('articlelist', {
+export const articleListStore = defineStore("articlelist", {
   state: () => {
     return {
-      articleList: local.get('articleList') || [],
+      articleList: local.get("articleList") || [],
+      total: 0
     }
   },
   actions: {
     saveArticleList(articleList) {
-      local.set('articleList', articleList)
+      local.set("articleList", articleList)
+      this.articleList = articleList
     },
     delArticleList() {
-      local.delete('articleList')
+      local.delete("articleList")
       this.articleList = {}
     }
   }

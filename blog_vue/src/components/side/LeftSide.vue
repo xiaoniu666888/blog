@@ -1,9 +1,9 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { nextTick, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router'
 import { userStore, articleListStore } from '@/stores';
 import { local } from '@/utils';
-import { getArticleTags } from '@/api/articles'
+import { getArticleTags, getArticle } from '@/api/articles'
 const useStore = userStore()
 const useArticleStore = articleListStore()
 const router = useRouter()
@@ -12,17 +12,34 @@ const tags = ref([])
 // 介绍假数据
 const popularTitle = ref([])
 onMounted(() => {
-    if (useArticleStore.articleList < 3) {
-        popularTitle.value = [
-            {
-                title: '暂无'
-            }
-        ]
-    }
-    popularTitle.value = useArticleStore.articleList.slice(0, 3)
-    getTags()
-
+    nextTick(() => {
+        getTags()
+        getArticleList()
+    })
 })
+// 获取文章列表
+const getArticleList = async () => {
+    // 根据作者和分页器的限制进行查询
+    let params = {
+        noteAuthor: useStore.userInfo.username,
+    }
+    try {
+        let { list, page } = await getArticle(params)
+        if (useArticleStore.articleList < 3) {
+            popularTitle.value = [
+                {
+                    title: '暂无'
+                }
+            ]
+        }
+        popularTitle.value = list.slice(0, 3)
+        useArticleStore.saveArticleList(list)
+        useArticleStore.total = page.total
+    } catch (error) {
+        console.error(error)
+    }
+
+}
 // 获取文章标签
 const getTags = async () => {
     const res = await getArticleTags({ noteAuthor: useStore.userInfo.username })
